@@ -16,10 +16,6 @@
 4. 支持子包,参考配置文件中的  `subpackage`,其实原版就支持, 目录为属性KEY加上 `_dir` 即可,例如 "`${xxxKEY_dir}`"
 5. 其他一些模板使用上的修正,参考 template 目录
 
-
-
-需要一个依赖: FreeMarker, 手册地址: [http://yuchenggroup.github.io/rapid-generator/FreeMarker_2.3.23_Manual_zh_CN/index.html](http://yuchenggroup.github.io/rapid-generator/FreeMarker_2.3.23_Manual_zh_CN/index.html)
-
 开始日期: 2016年1月21日
 
 
@@ -42,7 +38,10 @@
 ## 2. 代码生成
 
 ### 2.1 启动生成器
-
+resource下generator.xml 
+中mysql用户修改，basepackage，subpackage,urlpackage
+自己根据需求修改，模板为templete下相关文件，按照需要修改即可
+GeneratorMain 运行main方法即可
 将`bin`目录拷贝到需要的地方, 这就是生成文件需要的东西。
 
 拷贝好之后, 修改`generator.xml`,需要修改的 **entry** 包括:
@@ -100,18 +99,9 @@ Linux 系统(**未验证!!**):
 
 
 ### 2.3 其他
-
-默认的模板是为项目 cncounter-web 生成的, 项目地址为:
-
-[https://github.com/cncounter/cncounter](https://github.com/cncounter/cncounter)
-
-Controller层需要依赖的文件存放于 `template/cnc_main/other_java_file`目录下,请根据需要进行使用。
-
-
 - 高级用法请自己摸索。
 - template 下可以自己进行修改,可以参考源码,以及 Freemarker的官方文档(见上方)。
 - 配置文件信息,请参考`generator.xml`里面的注释。
-
 
 #### freemarker中key有特殊字符，如(.-等)
 
@@ -124,11 +114,4 @@ Controller层需要依赖的文件存放于 `template/cnc_main/other_java_file`�
 	ccc["ddd-eee"]
 
 
-联系方式: `renfufei@qq.com`
-
-
-如果你对整套的代码生成方案感兴趣，也可以参考:
-
-- JEECG 微云快速开发平台:[https://github.com/yuchenggroup/jeecg](https://github.com/yuchenggroup/jeecg)
-
-- JeeSite 企业信息化快速开发平台:[https://github.com/yuchenggroup/jeesite](https://github.com/yuchenggroup/jeesite)
+联系方式: `liangliang1259i@163.com`

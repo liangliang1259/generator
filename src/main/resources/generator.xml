@@ -45,10 +45,10 @@
 
 		
 	<!-- Mysql连接,useInformationSchema 取出表名注释 -->
-	<entry key="jdbc.url">jdbc:mysql://121.42.31.38:3306/questionanswer?useUnicode=true&amp;characterEncoding=utf8&amp;useInformationSchema=true</entry>
+	<entry key="jdbc.url">jdbc:mysql://localhost:3306/questionanswer?useUnicode=true&amp;characterEncoding=utf8&amp;useInformationSchema=true</entry>
 	<entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
-	<entry key="jdbc.username">liangliang</entry>
-	<entry key="jdbc.password">12597758</entry>
+	<entry key="jdbc.username">root</entry>
+	<entry key="jdbc.password">123456</entry>
 	
 	
 
