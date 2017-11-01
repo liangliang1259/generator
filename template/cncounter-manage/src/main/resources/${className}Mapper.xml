@@ -23,7 +23,7 @@
 		<#list table.columns as column>${column.sqlName}<#if column_has_next>,</#if></#list>
 	</sql>
 	
-	<select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+	<select id="getById" parameterType="int" resultMap="BaseResultMap">
 		select
 			<include refid="Base_Column_List" />
 		from
@@ -33,12 +33,17 @@
 	</select>
 
 
-	<delete id="deleteByPrimaryKey" parameterType="int">
+	<delete id="deleteById" parameterType="int">
 		delete from ${table.sqlName}
 		where
 		id = <@mapperEl "id"/>
 	</delete>
 
+	<select id="listAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ${table.sqlName}
+	</select>
 
 	<select id="countBy" resultType="int">
 		select count(*)
@@ -69,7 +74,7 @@
 		</if>
 	</select>
 	
-	<update id="updateByPrimaryKeySelective" parameterType="${basepackage}.${subpackage}.model.${className}">
+	<update id="update" parameterType="${basepackage}.${subpackage}.entity.${className}">
 		update ${table.sqlName}
 		<set>
 			<#list table.notPkColumns as column>
@@ -81,11 +86,22 @@
 		where
 			id = <@mapperEl "id"/>
 	</update>
-	
+
+
+	<insert id="insert" parameterType="${basepackage}.${subpackage}.entity.${className}">
+		insert into ${table.sqlName}(
+			<#list table.columns as column>
+				${column.sqlName},
+			</#list>
+			)values(
+		<#list table.columns as column>
+			${r'#{'}${column.columnNameFirstLower}, jdbcType=${column.jdbcSqlTypeName}${r'},'}
+		</#list>)
+	</insert>
 
 	
 	<insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
-		parameterType="${basepackage}.${subpackage}.model.${className}">
+		parameterType="${basepackage}.${subpackage}.entity.${className}">
 		insert into ${table.sqlName}
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 		<#list table.columns as column>

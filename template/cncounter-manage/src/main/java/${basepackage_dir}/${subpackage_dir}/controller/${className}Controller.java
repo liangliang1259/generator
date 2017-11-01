@@ -6,6 +6,9 @@ package ${basepackage}.admin.controller.${subpackage};
 
 import ${basepackage}.common.model.RestResult;
 import ${basepackage}.common.model.RestResultBuilder;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import ${basepackage}.common.web.controller.BaseController;
 import ${basepackage}.${subpackage}.entity.${className};
 import ${basepackage}.${subpackage}.service.${className}Service;
@@ -27,13 +30,15 @@ import java.util.List;
  * @author sunliangliang generated
  */
 @RestController
-@RequestMapping("/${subpackage}/${urlpackage}/")
+@RequestMapping("/${subpackage}/${urlpackage}")
 public class ${className}Controller extends BaseController {
     
     @Autowired
     private ${className}Service ${classNameLower}Service;
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@ApiOperation(value="添加${table.tableAlias}", notes="添加${table.tableAlias}")
+	@ApiImplicitParam(name = "${classNameLower}", value = "${table.tableAlias}实体", required = true, dataType = "${className}")
+	@PostMapping(value = "/create")
 	public RestResult create(@RequestBody @Valid ${className} ${classNameLower}) {
 		Boolean result = ${classNameLower}Service.save(${classNameLower});
 		if (result) {
@@ -42,28 +47,36 @@ public class ${className}Controller extends BaseController {
 		return RestResultBuilder.builder().failure().build();
 	}
 
-
-	@RequestMapping(value = "/update/{id}",method = RequestMethod.POST)
+	@ApiOperation(value="修改${table.tableAlias}信息", notes="根据url的id来指定更新对象，并根据传过来的信息来更新${table.tableAlias}详细信息")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "${table.tableAlias}id", required = true, dataType = "Long"),
+			@ApiImplicitParam(name = "robot", value = "${table.tableAlias}${classNameLower}", required = true, dataType = "${className}")
+	})
+	@PutMapping(value = "/update/{id}")
 	public RestResult update(@PathVariable Long id,@RequestBody @Valid ${className} ${classNameLower}){
 		${classNameLower}.setId(id);
 		${classNameLower}Service.update(${classNameLower});
 		return RestResultBuilder.builder().success().build();
 	}
 
-	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+	@ApiOperation(value="获取${table.tableAlias}信息", notes="根据url的id来获取${table.tableAlias}详细信息")
+	@GetMapping(value = "/get/{id}")
 	public RestResult get(@PathVariable Long id) {
 		${className} ${classNameLower} = ${classNameLower}Service.getById(id);
-		return RestResultBuilder.builder().success(user).build();
+		return RestResultBuilder.builder().success(${classNameLower}).build();
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@ApiOperation(value="获取${table.tableAlias}列表", notes="")
+	@GetMapping(value = "/list")
 	public RestResult list() {
 		List<${className}> ${classNameLower}s = ${classNameLower}Service.listAll();
 		return RestResultBuilder.builder().success(${classNameLower}s).build();
 	}
 
-	@RequestMapping("/delete/{id}", method = RequestMethod.GET)
-		public RestResult delete(@PathVariable Long id) {
+	@ApiOperation(value="删除${table.tableAlias}", notes="根据url的id来指定删除对象")
+	@ApiImplicitParam(name = "id", value = "${table.tableAlias}id", required = true, dataType = "Long")
+	@DeleteMapping("/delete/{id}")
+	public RestResult delete(@PathVariable Long id) {
 		${classNameLower}Service.delete(id);
 		return RestResultBuilder.builder().success().build();
 	}

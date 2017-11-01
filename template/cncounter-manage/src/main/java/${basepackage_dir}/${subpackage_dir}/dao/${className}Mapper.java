@@ -17,18 +17,17 @@ import ${basepackage}.${subpackage}.entity.${className};
 @Mapper
 public interface ${className}Mapper {
     
-    ${className} getById(Integer id);
+    ${className} getById(Long id);
     
     int insert(${className} ${classNameLower});
 
     int insertSelective(${className} ${classNameLower});
 
-    int updateByPrimaryKey(${className} ${classNameLower});
+    int update(${className} ${classNameLower});
 
-    int updateByPrimaryKeySelective(${className} ${classNameLower});
+    int deleteById(Long id);
 
-    int deleteById(Integer id);
+    List<${className}> listPage(${className} ${classNameLower});
 
-    List<${className}> list${className}s();
-
+    List<${className}> listAll();
 }

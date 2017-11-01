@@ -4,15 +4,12 @@
 <#assign classNameLower = className?uncap_first> 
 package ${basepackage}.${subpackage}.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-import ${basepackage}.${subpackage}.model.BaseEntity;
 /**
  * ${table.tableAlias}
  * @version 1.0
- * @author
+ * @author sunliangliang
  */
-public class ${className} extends BaseEntity {
+public class ${className}  {
 
 	<#list table.columns as column>
 	// ${column.columnAlias}
@@ -20,10 +17,11 @@ public class ${className} extends BaseEntity {
 	</#list>
 		
 	<#list table.columns as column>
+
 	public void set${column.columnName}(${column.simpleJavaType} value) {
 		this.${column.columnNameLower} = value;
 	}
-	
+
 	public ${column.simpleJavaType} get${column.columnName}() {
 		return this.${column.columnNameLower};
 	}

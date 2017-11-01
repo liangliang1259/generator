@@ -4,9 +4,7 @@
 <#assign shortName = table.shortName>
 package ${basepackage}.${subpackage}.service;
 
-import java.util.List;
-import java.util.Map;
-
+import com.changyou.thoth.common.service.BaseService;
 import ${basepackage}.${subpackage}.entity.${className};
 
 /**
